@@ -8,6 +8,47 @@
 # Required libs: jq (https://stedolan.github.io/jq/)
 ###############################################################
 
+## GUIDE
+guide=''
+guide+="usage: soldat-lobby [action] [options]\n"
+guide+="\n"
+guide+="Bash command-line interface for Soldat Lobby HTTP API \n"
+guide+="\n"
+guide+="actions:\n"
+guide+="    help           Print a guide to this CLI\n"
+guide+="    version        Version of Soldat\n"
+guide+="    maxplayers     Maximum number of players\n"
+guide+="    numbots        Number of bots\n"
+guide+="    bonusfreq      Bonus frequency\n"
+guide+="    respawn        Respawn time\n"
+guide+="    connectiontype ID of connection type\n"
+guide+="    numplayers     Number of players on server\n"
+guide+="    dedicated      Is dedicated server?\n"
+guide+="    realistic      Is Realistic game mode on?\n"
+guide+="    private        Is private server?\n"
+guide+="    survival       Is Survival game mode on?\n"
+guide+="    advanced       Is Advanced game mode on?\n"
+guide+="    wm             Is Weapon Mode applied?\n"
+guide+="    ac             Is Anti Cheat on?\n"
+guide+="    name           Name of a server\n"
+guide+="    country        Country where server is located\n"
+guide+="    info           Information about server\n"
+guide+="    currentmap     Currently played map\n"
+guide+="    os             Server's Operating System\n"
+guide+="    gamestyle      Game Style played on server\n"
+guide+="    ip             IP of a server\n"
+guide+="    port           Port of a server\n"
+guide+="    players        List of players currently playing\n"
+guide+="\n"
+guide+="options:\n"
+guide+="    --ip <IP>      Provides an IP of a server\n"
+guide+="    --port <port>  Provides a port of a server\n"
+guide+="\n"
+guide+="example usage:\n"
+guide+="    soldat-lobby version --ip 127.0.0.1 --port 27073\n"
+guide+="    \"1.7.1\"\n"
+guide+="\n"
+
 BASE_API_URL="http://api.soldat.pl/v0"
 
 # Error messages
@@ -148,6 +189,9 @@ elif [ $command = "port" ]
 then
     port="$(curl -s "$url" | jq ".Port")"
     echo $port
+elif [ $command = "guide" ] || [ $command = "help" ]
+then
+    echo -e "$guide"
 elif [ $command = "players" ]
 then
     players="$(curl -s "$url/players" | jq ".Players" | jq ".[]")"
