@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-###############################################################
-# Bash Interface for Soldat Lobby HTTP API
-# Authored by: Nonemoticoner
-# Soldat Lobby API docs: https://wiki.soldat.pl/index.php/Lobby_HTTP_API
-# Guide to this Bash script: https://github.com/Nonemoticoner/soldat-lobby
-# Required libs: jq (https://stedolan.github.io/jq/)
-###############################################################
+############################################################################
+# Bash Interface for Soldat Lobby HTTP API                                 #
+# Authored by: Nonemoticoner                                               #
+# Soldat Lobby API docs: https://wiki.soldat.pl/index.php/Lobby_HTTP_API   #
+# Guide to this Bash script: https://github.com/Nonemoticoner/soldat-lobby #
+# Required libs: jq (https://stedolan.github.io/jq/)                       #
+############################################################################
 
 ## GUIDE
 guide=''
@@ -53,10 +53,9 @@ BASE_API_URL="http://api.soldat.pl/v0"
 
 # Error messages
 PARSE_ERROR_MSG="Parse error! Check if arguments were written correctly!"
-CMD_ERROR_MSG="Parse error! Check if command was written correctly!"
 
 # Variables
-command="-"
+action="-"
 ip="-"
 port="-"
 
@@ -92,7 +91,7 @@ do
             port=$1
         fi
     else
-        command=$1
+        action=$1
     fi
 
     shift
@@ -101,98 +100,98 @@ done
 ## PRINT OUT DESIRED DATA
 url="${BASE_API_URL}/server/${ip}/${port}"
 
-if [ $command = "version" ]
+if [ $action = "version" ]
 then
     version="$(curl -s "$url" | jq ".Version")"
     echo $version
-elif [ $command = "maxplayers" ]
+elif [ $action = "maxplayers" ]
 then
     maxplayers="$(curl -s "$url" | jq ".MaxPlayers")"
     echo $maxplayers
-elif [ $command = "numbots" ]
+elif [ $action = "numbots" ]
 then
     numbots="$(curl -s "$url" | jq ".NumBots")"
     echo $numbots
-elif [ $command = "bonusfreq" ]
+elif [ $action = "bonusfreq" ]
 then
     bonusfreq="$(curl -s "$url" | jq ".BonusFreq")"
     echo $bonusfreq
-elif [ $command = "respawn" ]
+elif [ $action = "respawn" ]
 then
     respawn="$(curl -s "$url" | jq ".Respawn")"
     echo $respawn
-elif [ $command = "connectiontype" ]
+elif [ $action = "connectiontype" ]
 then
     connectiontype="$(curl -s "$url" | jq ".ConnectionType")"
     echo $connectiontype
-elif [ $command = "numplayers" ]
+elif [ $action = "numplayers" ]
 then
     numplayers="$(curl -s "$url" | jq ".NumPlayers")"
     echo $numplayers
-elif [ $command = "dedicated" ]
+elif [ $action = "dedicated" ]
 then
     dedicated="$(curl -s "$url" | jq ".Dedicated")"
     echo $dedicated
-elif [ $command = "realistic" ]
+elif [ $action = "realistic" ]
 then
     realistic="$(curl -s "$url" | jq ".Realistic")"
     echo $realistic
-elif [ $command = "private" ]
+elif [ $action = "private" ]
 then
     private="$(curl -s "$url" | jq ".Private")"
     echo $private
-elif [ $command = "survival" ]
+elif [ $action = "survival" ]
 then
     survival="$(curl -s "$url" | jq ".Survival")"
     echo $survival
-elif [ $command = "advanced" ]
+elif [ $action = "advanced" ]
 then
     advanced="$(curl -s "$url" | jq ".Advanced")"
     echo $advanced
-elif [ $command = "wm" ]
+elif [ $action = "wm" ]
 then
     wm="$(curl -s "$url" | jq ".WM")"
     echo $wm
-elif [ $command = "ac" ]
+elif [ $action = "ac" ]
 then
     ac="$(curl -s "$url" | jq ".AC")"
     echo $ac
-elif [ $command = "name" ]
+elif [ $action = "name" ]
 then
     name="$(curl -s "$url" | jq ".Name")"
     echo $name
-elif [ $command = "country" ]
+elif [ $action = "country" ]
 then
     country="$(curl -s "$url" | jq ".Country")"
     echo $country
-elif [ $command = "info" ]
+elif [ $action = "info" ]
 then
     info="$(curl -s "$url" | jq ".Info")"
     echo $info
-elif [ $command = "currentmap" ]
+elif [ $action = "currentmap" ]
 then
     currentmap="$(curl -s "$url" | jq ".CurrentMap")"
     echo $currentmap
-elif [ $command = "os" ]
+elif [ $action = "os" ]
 then
     os="$(curl -s "$url" | jq ".OS")"
     echo $os
-elif [ $command = "gamestyle" ]
+elif [ $action = "gamestyle" ]
 then
     gamestyle="$(curl -s "$url" | jq ".GameStyle")"
     echo $gamestyle
-elif [ $command = "ip" ]
+elif [ $action = "ip" ]
 then
     ip="$(curl -s "$url" | jq ".IP")"
     echo $ip
-elif [ $command = "port" ]
+elif [ $action = "port" ]
 then
     port="$(curl -s "$url" | jq ".Port")"
     echo $port
-elif [ $command = "guide" ] || [ $command = "help" ]
+elif [ $action = "guide" ] || [ $action = "help" ]
 then
     echo -e "$guide"
-elif [ $command = "players" ]
+elif [ $action = "players" ]
 then
     players="$(curl -s "$url/players" | jq ".Players" | jq ".[]")"
 
